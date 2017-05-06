@@ -12,8 +12,8 @@ from sklearn.utils import shuffle
 import numpy as np
 
 tfidf = TfidfVectorizer(max_df=0.2, min_df=10, binary=True)
-# lc = LogisticRegression(C=0.1)
-lc = SVC(probability=True)
+lc = LogisticRegression(C=0.1)
+# lc = SVC(probability=True)
 pipeline = make_pipeline(tfidf, lc)
 
 project_dir = 'projects'

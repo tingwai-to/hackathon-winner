@@ -3,3 +3,6 @@
 !.elasticbeanstalk/*.global.yml
 .idea/
 projects/
+__pycache__/
+# Elastic Beanstalk Files
+*.pyc
