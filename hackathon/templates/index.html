@@ -11,7 +11,9 @@
             $("textarea").on("input propertychange", function () {
                 var text = $("textarea").val();
                 if (text.length > 0) {
-                    $.get("/predict/" + text, function (data) {
+                    $.get("/predict/", {
+                        "text": text
+                    }, function (data) {
                         $("p").text(data);
                     });
                 }
