@@ -9,6 +9,7 @@ docutils==0.13.1
 durationpy==0.4
 future==0.16.0
 futures==3.1.1
+gunicorn==19.7.1
 hjson==2.0.2
 itsdangerous==0.24
 Jinja2==2.9.6
