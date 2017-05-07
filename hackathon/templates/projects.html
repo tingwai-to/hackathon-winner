@@ -89,10 +89,6 @@
 </nav>
 
 <div class="container">
-    <a href="{% url 'projects' %}">sadfd</a>
-</div>
-
-<div class="container">
     <form>
         <label for="tech_tags"></label>
         <select name="tech_tags" id="tech_tags" class="form-control" multiple>
@@ -116,6 +112,7 @@
                 <img src="{{ project.thumbnail }}" class="img-thumbnail" alt="{{ project.name }}" width="304"
                      height="236">
             </a>
+            <br/>
             <a href="{{ project.url }}">{{ project.name }}</a>
         </div>
         {% endfor %}
