@@ -6,4 +6,5 @@ projects/
 __pycache__/
 # Elastic Beanstalk Files
 *.pyc
+db.sqlite3
 venv/
