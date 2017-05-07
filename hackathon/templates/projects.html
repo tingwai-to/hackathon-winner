@@ -1,0 +1,10 @@
+<ul>
+    {% for project in projects %}
+        <li><a href="{{ project.url }}">{{ project.name }}</a></li>
+        <ul>
+            {% for tech in project.technologies.all %}
+                <li>{{ tech.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>

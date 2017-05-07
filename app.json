@@ -1,6 +1,6 @@
 {
-  "name": "redditlsa",
-  "description": "Reddit LSA",
+  "name": "hackpredict",
+  "description": "hackpredict",
   "image": "heroku/python",
   "addons": [
     "heroku-postgresql"
