@@ -1,10 +1,120 @@
-<ul>
-    {% for project in projects %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Detect your chance at winning">
+    <title>HackPredict</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <link
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"
+        rel="stylesheet">
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!--<style>-->
+        <!--body {-->
+            <!--background-color: #43BFC7;-->
+            <!--color: white;-->
+            <!--font-family: "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;-->
+        <!--}-->
+
+        <!--h1 {-->
+            <!--font-family: "Arial Black", Gadget, sans-serif;-->
+        <!--}-->
+
+        <!--main {-->
+            <!--margin: auto;-->
+            <!--text-align: center;-->
+        <!--}-->
+
+        <!--#result {-->
+            <!--margin-top: 3%;-->
+            <!--margin-bottom: 5%;-->
+        <!--}-->
+
+        <!--label {-->
+            <!--display: block;-->
+            <!--margin-bottom: 5px;-->
+        <!--}-->
+
+        <!--textarea {-->
+            <!--border: 1px solid #cccccc;-->
+            <!--resize: none;-->
+            <!--width: 50%;-->
+        <!--}-->
+
+    <!--</style>-->
+
+</head>
+
+<body>
+
+<div class="container">
+    <select id="tech_tags" class="form-control" multiple>
+        {% for each_technology in technology %}
+        <option value="{{ each_technology }}">{{ each_technology }})</option>
+        {% endfor %}
+
+    </select>
+
+</div>
+
+<div class="container">
+    <ul>
+        {% for project in projects %}
         <li><a href="{{ project.url }}">{{ project.name }}</a></li>
         <ul>
             {% for tech in project.technologies.all %}
-                <li>{{ tech.name }}</li>
+            <li>{{ tech.name }}</li>
             {% endfor %}
         </ul>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    var select2Params = {
+       ajax: {
+           url: "{% url 'tech_search' %}",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+               return {
+                   query: params.term
+               };
+           },
+           processResults: function (data, params) {
+               return {
+                   results: data.items
+               };
+           },
+           cache: true
+       },
+       escapeMarkup: function (markup) {
+           return markup;
+       },
+       minimumInputLength: 1,
+       placeholder: 'Select a tag',
+       allowClear: true
+    };
+
+    $("#tech_tags").prop("selectedIndex", -1);
+    $("#tech_tags").select2(select2Params).on('select2:open', function () {
+
+      $('.select2-dropdown--above').attr('id', 'fix');
+      $('#fix').removeClass('select2-dropdown--above');
+      $('#fix').addClass('select2-dropdown--below');
+
+});
+
+</script>
+</body>

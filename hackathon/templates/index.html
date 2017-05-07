@@ -37,25 +37,29 @@
             resize: none;
             width: 50%;
         }
+
     </style>
-</head>
-<body>
-    <main>
-        <h1><strong>HackPredict</strong></h1>
-        <div id="result">
-          <br />
-          <em>Enter your ideas to see the chance of your team winning!</em>
-        </div>
-        <div class="form-group">
-          <label for="idea">Your idea?</label>
-          <textarea class="form-control" rows="5" id="idea" placeholder="Ideas..." ></textarea>
-        </div>
-    </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <script>
+
+</head>
+<body>
+<main>
+    <h1><strong>HackPredict</strong></h1>
+    <div id="result">
+        <br/>
+        <em>Enter your ideas to see the chance of your team winning!</em>
+    </div>
+    <div class="form-group">
+        <label for="idea">Your idea?</label>
+        <textarea class="form-control" rows="5" id="idea" placeholder="Ideas..."></textarea>
+    </div>
+</main>
+
+
+<script>
         $(function () {
             $("textarea").on("input propertychange", function () {
                 var text = $("textarea").val();
@@ -68,6 +72,7 @@
                 }
             });
         });
-    </script>
+
+</script>
 </body>
 </html>
