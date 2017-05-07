@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Detect your chance at winning">
     <title>HackPredict</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
             background-color: #43BFC7;
@@ -23,8 +24,25 @@
         }
 
         #result {
-            margin-top: 3%;
-            margin-bottom: 5%;
+            background-color: #35989f;
+            margin: 3% auto 5% auto;
+            padding: 1%;
+            text-align: center;
+            width: 45%;
+        }
+
+        #result ul {
+            list-style-type: none;
+            text-align: center;
+        }
+
+        #result li {
+            display: inline;
+            margin: 0 5px ;
+        }
+
+        #result li .fa {
+            color: #b3e8d1;
         }
 
         label {
@@ -34,12 +52,13 @@
 
         textarea {
             border: 1px solid #cccccc;
+            color: #348193;
             resize: none;
             width: 50%;
         }
 
     </style>
-
+    
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
@@ -67,7 +86,21 @@
                     $.get("/predict/", {
                         "text": text
                     }, function (data) {
-                        $("#result").html("<h3>" + data + "</h3>");
+                        const dot = Math.round(data * 10);
+
+                        // looping to create a list of dots
+                        let progress = "<ul id='progress'>";
+                        for (var i = 0; i < dot; i++) {
+                            progress += "<li><i class='fa fa-circle' aria-hidden='true'></i></li>";
+                        }
+                        for (var i = 0; i < 10-dot; i++) {
+                            progress += "<li><i class='fa fa-circle-thin' aria-hidden='true'></i></li>";
+                        }
+                        progress += "</ul>";
+
+                        $("#result").html(
+                            "<div id='score'>" + Math.round(data * 100) + "%</div>" + progress
+                        );
                     });
                 }
             });
