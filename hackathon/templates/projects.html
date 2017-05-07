@@ -21,36 +21,36 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <!--<style>-->
-        <!--body {-->
-            <!--background-color: #43BFC7;-->
-            <!--color: white;-->
-            <!--font-family: "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;-->
-        <!--}-->
+    <!--body {-->
+    <!--background-color: #43BFC7;-->
+    <!--color: white;-->
+    <!--font-family: "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;-->
+    <!--}-->
 
-        <!--h1 {-->
-            <!--font-family: "Arial Black", Gadget, sans-serif;-->
-        <!--}-->
+    <!--h1 {-->
+    <!--font-family: "Arial Black", Gadget, sans-serif;-->
+    <!--}-->
 
-        <!--main {-->
-            <!--margin: auto;-->
-            <!--text-align: center;-->
-        <!--}-->
+    <!--main {-->
+    <!--margin: auto;-->
+    <!--text-align: center;-->
+    <!--}-->
 
-        <!--#result {-->
-            <!--margin-top: 3%;-->
-            <!--margin-bottom: 5%;-->
-        <!--}-->
+    <!--#result {-->
+    <!--margin-top: 3%;-->
+    <!--margin-bottom: 5%;-->
+    <!--}-->
 
-        <!--label {-->
-            <!--display: block;-->
-            <!--margin-bottom: 5px;-->
-        <!--}-->
+    <!--label {-->
+    <!--display: block;-->
+    <!--margin-bottom: 5px;-->
+    <!--}-->
 
-        <!--textarea {-->
-            <!--border: 1px solid #cccccc;-->
-            <!--resize: none;-->
-            <!--width: 50%;-->
-        <!--}-->
+    <!--textarea {-->
+    <!--border: 1px solid #cccccc;-->
+    <!--resize: none;-->
+    <!--width: 50%;-->
+    <!--}-->
 
     <!--</style>-->
 
@@ -59,12 +59,18 @@
 <body>
 
 <div class="container">
-    <select id="tech_tags" class="form-control" multiple>
-        {% for each_technology in technology %}
-        <option value="{{ each_technology }}">{{ each_technology }})</option>
-        {% endfor %}
+    <form>
+        <label for="tech_tags"></label>
+        <select name="tech_tags" id="tech_tags" class="form-control" multiple>
+            {% for each_technology in technology %}
+            <option value="{{ each_technology }}">{{ each_technology }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
-    </select>
+<div class="container" id="projects_results">
 
 </div>
 
@@ -83,38 +89,38 @@
 
 <script>
     var select2Params = {
-       ajax: {
-           url: "{% url 'tech_search' %}",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-               return {
-                   query: params.term
-               };
-           },
-           processResults: function (data, params) {
-               return {
-                   results: data.items
-               };
-           },
-           cache: true
-       },
-       escapeMarkup: function (markup) {
-           return markup;
-       },
-       minimumInputLength: 1,
-       placeholder: 'Select a tag',
-       allowClear: true
+        ajax: {
+            url: "{% url 'tech_search' %}",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    query: params.term
+                };
+            },
+            processResults: function (data, params) {
+                return {
+                    results: data.items
+                };
+            },
+            cache: true
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        minimumInputLength: 1,
+        placeholder: 'Filter by tag',
+        allowClear: true
     };
 
     $("#tech_tags").prop("selectedIndex", -1);
     $("#tech_tags").select2(select2Params).on('select2:open', function () {
 
-      $('.select2-dropdown--above').attr('id', 'fix');
-      $('#fix').removeClass('select2-dropdown--above');
-      $('#fix').addClass('select2-dropdown--below');
+        $('.select2-dropdown--above').attr('id', 'fix');
+        $('#fix').removeClass('select2-dropdown--above');
+        $('#fix').addClass('select2-dropdown--below');
 
-});
+    });
 
 </script>
 </body>

@@ -1,6 +1,6 @@
 import traceback
 
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from sklearn.externals import joblib
@@ -23,10 +23,15 @@ def tech_search_view(request):
     tech_query = Technology.objects.filter(name__icontains=query).annotate(num_projects=Count('projects')).order_by('-num_projects')[:15]
     return JsonResponse({'items': [{'text': tech.name, 'id': tech.name} for tech in tech_query]})
 
+
 def projects_view(request):
-    projects = Project.objects.all()[:40]
-    technology = Technology.objects.annotate(num_projects=Count('projects')).order_by('-num_projects')
-    return render(request, 'projects.html', {'projects': projects, 'technology': technology})
+    tag_names = request.GET.getlist('tech_tags')
+    q = Q()
+    for tag in tag_names:
+        q &= Q(technologies=Technology.objects.get(name=tag))
+    projects = Project.objects.filter(is_winner=True).filter(q)[:10]
+    return render(request, 'projects.html', {'projects': projects})
+
 
 def server_error_view(request):
     print('Server Error. Printing stack trace.')
