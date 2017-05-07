@@ -1,10 +1,12 @@
 import json
+import os
 import traceback
 
 import markovify
+from django.conf import settings
 from django.shortcuts import render
 
-with open('model.json', 'r') as f:
+with open(os.path.join(settings.PROJECT_ROOT, 'markov.json'), 'r') as f:
     model_json = json.load(f)
 
 model = markovify.Text.from_json(model_json)
