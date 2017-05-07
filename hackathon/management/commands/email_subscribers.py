@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import json
 import os
 
@@ -17,10 +19,16 @@ sp = SparkPost(os.environ['SPARKPOST_KEY'])
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument('frequency', type=int)
+
     def handle(self, *args, **options):
-        subscriptions = Subscription.objects.all()
+        frequency = options['frequency']
+        assert 0 <= frequency <= 1
+        subscriptions = Subscription.objects.filter(frequency=frequency)
         for sub in subscriptions:
             email = sub.email
+            print('emailing', email)
             pitch = model.make_short_sentence(140)
             if settings.DEBUG:
                 unsub_url = "http://localhost:8000/unsubscribe?email={}".format(email)
