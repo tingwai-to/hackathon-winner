@@ -25,9 +25,10 @@ if not os.path.exists(root_deployments_dir):
 # Only the files listed here, and the libraries in the requirements.txt
 # file will be included in the deployment.
 deployment_files =\
-    ['predict.py',
-     'model.pkl',
-     'get_winner.py'
+    ['generate_idea.py',
+     'AlexaBaseHandler.py',
+     'SampleUtterances.txt',
+     'IntentSchema.json',
      ]
 
 def _read_requirements():
