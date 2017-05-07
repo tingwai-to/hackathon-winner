@@ -11,5 +11,7 @@ admin.autodiscover()
 
 handler500 = 'hackathon.views.server_error_view'
 urlpatterns = [
-    url(r'^$', views.index_view, name='home'),
+    url(r'^$', views.index_view),
+    url(r'^subscribe', views.subscribe_view, name='subscribe'),
+    url(r'^unsubscribe', views.unsubscribe_view),
 ]

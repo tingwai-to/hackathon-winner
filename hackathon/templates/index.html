@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Detect your chance at winning">
     <title>HackPredict</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #43BFC7;
@@ -38,7 +43,7 @@
 
         #info li {
             display: inline;
-            margin: 0 5px ;
+            margin: 0 5px;
         }
 
         #info li .fa {
@@ -58,17 +63,48 @@
         }
 
     </style>
+    <script>
+        $(function () {
+            $("form").submit(function (e) {
+                var url = "{% url 'subscribe' %}";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $("form").serialize()
+                }).done(function (data) {
+                    alert('Successfuly subscribed! Check your email to confirm subscription.');
+                }).fail(function (data) {
+                    alert(data.responseText);
+                });
+
+                e.preventDefault();
+                return false;
+            });
+        });
+    </script>
 </head>
 <body>
 <main>
     <h1><strong>HackGenerator</strong></h1>
     <div id="info">
-        <br/>
         <em>Random pitches generated based off of previous hackathon winners.</em>
     </div>
     <div class="form-group">
         <p>{{ pitch }}</p>
     </div>
+    <p>Want to subscribe to receive random ideas?</p>
+    <form>
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email">
+        <label for="frequency">Frequency</label>
+        <select id="frequency" name="frequency">
+            <option value="0">Hourly</option>
+            <option value="1">Daily</option>
+        </select>
+        <button type="submit">Subscribe!</button>
+    </form>
 </main>
 </body>
 </html>
