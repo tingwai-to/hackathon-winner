@@ -1,26 +1,18 @@
+import json
 import traceback
 
-from django.http import HttpResponse
+import markovify
 from django.shortcuts import render
-from sklearn.externals import joblib
 
-from hackathon.models import Project
+with open('model.json', 'r') as f:
+    model_json = json.load(f)
 
-model = joblib.load('model.pkl')
+model = markovify.Text.from_json(model_json)
 
 
 def index_view(request):
-    return render(request, 'index.html')
-
-
-def predict_view(request):
-    text = request.GET.get('text').encode('ascii', 'ignore').strip()
-    return HttpResponse(model.predict_proba([text])[0][1])
-
-
-def projects_view(request):
-    projects = Project.objects.all()[:40]
-    return render(request, 'projects.html', {'projects': projects})
+    pitch = model.make_short_sentence(140)
+    return render(request, 'index.html', {'pitch': pitch})
 
 
 def server_error_view(request):

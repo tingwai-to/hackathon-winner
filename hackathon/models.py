@@ -3,7 +3,7 @@ from django.db import models
 
 class Project(models.Model):
     is_winner = models.BooleanField(default=False)
-    name = models.CharField(max_length=1000, null=True)
+    name = models.CharField(max_length=255, null=True)
     project_id = models.IntegerField(primary_key=True, unique=True, default=1)
     url = models.URLField(null=True)
     thumbnail = models.URLField(null=True, max_length=400)
@@ -17,7 +17,7 @@ class Project(models.Model):
 
 
 class Technology(models.Model):
-    name = models.CharField(max_length=200, primary_key=True, unique=True)
+    name = models.CharField(max_length=255, primary_key=True, unique=True)
     projects = models.ManyToManyField(Project, related_name='technologies')
 
     def __repr__(self):

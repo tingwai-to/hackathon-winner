@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -117,16 +116,6 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 # db_from_env = dj_database_url.config()
 # DATABASES['default'].update(db_from_env)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hackpredict',
-        'USER': 'tingwai',
-        'PASSWORD': 'herokudb',
-        'HOST': 'hackpredict.cvhpeuk58fpc.us-west-1.rds.amazonaws.com',
-        'PORT': '3306',
-    }
-}
 try:
     from local_settings import *
 except ImportError:

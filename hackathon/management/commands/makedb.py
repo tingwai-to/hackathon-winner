@@ -9,14 +9,12 @@ from hackathon.models import Project, Technology
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        Project.objects.all().delete()
-        Technology.objects.all().delete()
-
         project_dir = os.path.join(settings.PROJECT_ROOT, '..', 'projects')
 
-        i = 0
+        for i, fname in enumerate(os.listdir(project_dir)):
+            if i < 31100:
+                continue
 
-        for fname in os.listdir(project_dir):
             path = os.path.join(project_dir, fname)
             with open(path, 'r') as f:
                 js = json.load(f)
@@ -38,11 +36,11 @@ class Command(BaseCommand):
                 'url': url
             })
 
-            for tech_name in js['built_with']:
-                tech, created = Technology.objects.get_or_create(name=tech_name)
-                tech.save()
-                project.technologies.add(tech)
+            if created:
+                for tech_name in js['built_with']:
+                    tech, created = Technology.objects.get_or_create(name=tech_name)
+                    tech.save()
+                    project.technologies.add(tech)
 
-            i += 1
             if i % 100 == 0:
                 print(i)
