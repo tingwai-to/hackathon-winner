@@ -25,14 +25,16 @@ if not os.path.exists(root_deployments_dir):
 # Only the files listed here, and the libraries in the requirements.txt
 # file will be included in the deployment.
 deployment_files =\
-    ['generate_idea.py',
+    ['hackathon/markov.json',
+     'alexa_lambda_main.py',
      'AlexaBaseHandler.py',
+     'AlexaDeploymentHandler.py',
      'SampleUtterances.txt',
-     'IntentSchema.json',
+     'IntentSchema.json'
      ]
 
 def _read_requirements():
-    with open("./requirements.txt", 'r') as f:
+    with open("./requirements_lambda.txt", 'r') as f:
         install_requirements = f.readlines()
 
     return install_requirements

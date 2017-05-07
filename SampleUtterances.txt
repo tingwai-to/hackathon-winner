@@ -1,6 +1,15 @@
 GenerateIdea what is a random idea
+GenerateIdea what is an hackathon idea
 GenerateIdea what is a random hackathon idea
 GenerateIdea give me a random idea
+GenerateIdea give me a hackathon idea
+GenerateIdea give me an idea
 GenerateIdea give me a random hackathon idea
 GenerateIdea generate a random idea
 GenerateIdea generate a random hackathon idea
+GenerateIdea generate a hackathon idea
+GenerateIdea create a random hackathon idea
+GenerateIdea create a random idea
+GenerateIdea create a random hackathon idea
+GenerateIdea create a hackathon idea
+GenerateIdea create a random hackathon idea

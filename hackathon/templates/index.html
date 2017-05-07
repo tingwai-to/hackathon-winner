@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Detect your chance at winning">
-    <title>HackPredict</title>
+    <title>HackGen</title>
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
             background-color: #43BFC7;
             color: white;
-            font-family: "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
         }
 
         h1 {
@@ -28,17 +28,28 @@
             text-align: center;
         }
 
-        #info {
-            background-color: #35989f;
+        #pitch {
+            background-color: #c6ebee;
+            color: #35989f;
             margin: 3% auto 5% auto;
-            padding: 1%;
+            padding: 1% 3%;
             text-align: center;
-            width: 45%;
+            width: 50%;
         }
 
-        #info ul {
-            list-style-type: none;
-            text-align: center;
+        button {
+            background-color: white;
+            border: 2px solid #35989f;
+            border-radius: 3px;
+            color: #35989f;
+            font-size: .75em;
+            padding: .5em;
+            text-shadow: .4px .4px #43BFC7;
+        }
+
+        button:hover, button:focus {
+            background-color: #35989f;
+            color: white;
         }
 
         #info li {
@@ -46,20 +57,23 @@
             margin: 0 5px;
         }
 
-        #info li .fa {
-            color: #b3e8d1;
+        footer {
+            color: white;
+            margin: auto;
+            text-align: center;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
+        footer a:link, footer a:visited {
+            color: white;
         }
 
-        textarea {
-            border: 1px solid #cccccc;
-            color: #348193;
-            resize: none;
-            width: 50%;
+        footer a:hover, footer a:active {
+            color: #35989f;
+        }
+
+        footer p {
+            font-size: .75em;
+            margin: .5%;
         }
 
     </style>
@@ -88,10 +102,11 @@
 <main>
     <h1><strong>HackGenerator</strong></h1>
     <div id="info">
-        <em>Random pitches generated based off of previous hackathon winners.</em>
+        <p>Random pitches generated based off of previous hackathon winners.</p>
     </div>
-    <div class="form-group">
-        <p>{{ pitch }}</p>
+    <div id="pitch">
+        <h3>{{ pitch }}</h3>
+        <button class="more"><strong>More Ideas!</strong></button>
     </div>
     <p>Want to subscribe to receive random ideas?</p>
     <form>
@@ -106,5 +121,21 @@
         <button type="submit">Subscribe!</button>
     </form>
 </main>
+<footer>
+    <a href="https://github.com/tingwai-to/hackathon-winner"><i class="fa fa-2x fa-github-square"
+                                                                aria-hidden="true"></i></a>
+    <p>HackGen is a 2017 AngelHack entry by
+        <a href="https://github.com/tingwai-to">Ting-Wai To</a>,
+        <a href="https://github.com/MichaelSnowden">Michael Snowden</a>, and
+        <a href="https://github.com/amychan331">Amy Chan</a>.</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('button').on("click", function () {
+            $("#pitch h3").load(window.location.href + "#pitch h3");
+        })
+    })
+</script>
 </body>
 </html>
